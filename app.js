@@ -2,10 +2,14 @@ const app = Vue.createApp({
    // data, functions
   data(){
       return{
+          url: 'http://www.thenetninja.co.uk',
           showBooks: true,
-          title: 'The Final Empire',
-          author: 'Odwa',
-          age: 45
+          books: [
+              {title: 'name of the wind', author: 'patrick rothfuss', img: 'assets/pic1.jpg',isFav: true},
+              {title: 'the way of kings', author: 'brandon sanderson', img: 'assets/p2.jpeg',isFav: false},
+              {title: 'the final empire', author: 'brandon sanderson', img: 'assets/p3.png',isFav: true},
+              
+          ]
       }
   },
   methods: {
@@ -17,13 +21,19 @@ const app = Vue.createApp({
          // this.title = 'Words'
         // this.title = title
       },
-      handleEvent(a, data){
-          console.log(a, a.type)
-          if (data){
-              console.log(data)
-          }
+
+      toggleFav(book){
+          book.isFav = !book.isFav
+
       }
+      
+     
   },
+  computed: {
+      filteredBooks(){
+          return this.books.filter((book) => book.isFav)
+      }
+  }
 
 })
 
